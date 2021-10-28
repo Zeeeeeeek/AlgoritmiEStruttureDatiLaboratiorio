@@ -131,8 +131,7 @@ public class Aula implements Comparable<Aula> {
     public boolean addFacility(Facility f) {
         if(f == null) throw new NullPointerException("La facility passata è nulla");
         if(!(facilities.contains(f))) {
-            facilities.add(f);
-            return true;
+            return facilities.add(f);
         }
         return false;
     }
