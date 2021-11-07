@@ -3,7 +3,7 @@ package it.unicam.cs.asdl2122.es6;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
+
 
 public class TestDavveroBello {
     @Test
@@ -13,9 +13,12 @@ public class TestDavveroBello {
             list.add(null);
         });
         assertEquals(0, list.size());
-        list.add("dsakjfbskdbf");
+        list.add("a");
         assertFalse(list.isEmpty());
         assertEquals(1, list.size());
+        assertTrue(list.contains("a"));
+
+        assertEquals(1, list.getNumeroModifiche());
     }
 
     @Test
@@ -23,21 +26,26 @@ public class TestDavveroBello {
         ASDL2122SingleLinkedList<String> list = new ASDL2122SingleLinkedList<>();
         list.add("aaa");
         assertTrue(list.contains("aaa"));
-        assertFalse(list.contains("aaaasdasdasd"));
+        assertFalse(list.contains("bbbbbb"));
+        assertThrows(NullPointerException.class, () -> {
+            list.contains(null);
+        });
+        list.remove("aaa");
+        assertFalse(list.contains("aaa"));
     }
 
     @Test
     final void testRemove() {
         ASDL2122SingleLinkedList<String> list = new ASDL2122SingleLinkedList<>();
-        list.add("aaa");
-        list.add("aaa");
-        list.add("asa");
-        list.add("agfa");
+        list.add("a");
+        list.add("a");
+        list.add("b");
+        list.add("z");
 
-        list.remove("aaa");
-        assertTrue(list.contains("aaa"));
-        list.remove("aaa");
-        assertFalse(list.contains("aaa"));
+        list.remove("a");
+        assertTrue(list.contains("a"));
+        list.remove("a");
+        assertFalse(list.contains("a"));
         assertEquals(2, list.size());
         assertEquals(6, list.getNumeroModifiche());
     }
@@ -46,10 +54,10 @@ public class TestDavveroBello {
     final void testClear() {
         ASDL2122SingleLinkedList<String> list = new ASDL2122SingleLinkedList<>();
 
-        list.add("aaa");
-        list.add("aaa");
-        list.add("asa");
-        list.add("agfa");
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
 
         list.clear();
         assertEquals(0, list.size());
@@ -75,6 +83,7 @@ public class TestDavveroBello {
         });
 
         assertEquals("b", list.get(1));
+        assertEquals("d", list.get(3));
     }
 
     @Test
@@ -87,7 +96,7 @@ public class TestDavveroBello {
         list.add("d");
 
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            list.set(4, "aaaaaa");
+            list.set(4, "z");
         });
         assertThrows(NullPointerException.class, () -> {
             list.set(2, null);
@@ -162,9 +171,27 @@ public class TestDavveroBello {
         assertEquals("a", list.get(0));
         assertEquals("c", list.get(1));
 
+        list.clear();
+
+        list.add("a");
+        list.add("b");
+        list.add("c");
+
+        list.remove(0);
         list.remove(0);
 
         assertEquals("c", list.get(0));
+
+        list.clear();
+
+        list.add("a");
+        list.add("b");
+        list.add("c");
+
+        list.remove(0);
+        list.remove(1);
+
+        assertEquals("b", list.get(0));
     }
 
     @Test
@@ -180,6 +207,10 @@ public class TestDavveroBello {
         });
 
         assertEquals(1, list.indexOf("b"));
+        list.remove("b");
+        assertEquals(1, list.indexOf("c"));
+        list.add("z");
+        assertEquals(2, list.indexOf("z"));
     }
 
 
@@ -200,6 +231,10 @@ public class TestDavveroBello {
         });
 
         assertEquals(5, list.lastIndexOf("b"));
+        assertEquals(6, list.lastIndexOf("c"));
+
+        list.remove(5);
+        assertEquals(4, list.lastIndexOf("b"));
     }
 
 

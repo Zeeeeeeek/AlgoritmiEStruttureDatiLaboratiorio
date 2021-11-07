@@ -216,6 +216,7 @@ public class ASDL2122SingleLinkedList<E> implements List<E> {
 
     @Override
     public boolean contains(Object o) {
+        if (o == null) throw new NullPointerException("La lista non ammette elementi nulli");
         Itr iterator = new Itr();
         while (iterator.hasNext()) {
             E item = iterator.next();
@@ -229,7 +230,7 @@ public class ASDL2122SingleLinkedList<E> implements List<E> {
         if (e == null) throw new NullPointerException("La lista non può contenere valori nulli");
         Node<E> node = new Node<>(e, null);
         if (size == 0) {
-            //Se la lista non ha elementi la testa e la coda sono l'oggetto che aggiungo
+            //Se la lista non ha elementi la testa è l'oggetto che aggiungo
             head = node;
         } else {
             tail.next = node;
@@ -339,16 +340,16 @@ public class ASDL2122SingleLinkedList<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        if(index < 0 || index >= size) throw new IndexOutOfBoundsException("Indece non valido");
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Indece non valido");
         E itemRemoved = get(index);
         Itr iterator = new Itr();
         Node<E> previousNode = null;
         int i = 0;
 
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             iterator.next();
-            if(index == i) {
-                if(previousNode == null) {
+            if (index == i) {
+                if (previousNode == null) {
                     head = iterator.lastReturned.next;
                 } else {
                     previousNode.next = iterator.lastReturned.next;
@@ -365,12 +366,12 @@ public class ASDL2122SingleLinkedList<E> implements List<E> {
 
     @Override
     public int indexOf(Object o) {
-        if(o == null)throw new NullPointerException("La lista non ammette elementi nulli");
+        if (o == null) throw new NullPointerException("La lista non ammette elementi nulli");
         Itr iterator = new Itr();
         int index = 0;
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             E item = iterator.next();
-            if(item.equals(o)) {
+            if (item.equals(o)) {
                 return index;
             }
             index++;
@@ -380,18 +381,18 @@ public class ASDL2122SingleLinkedList<E> implements List<E> {
 
     @Override
     public int lastIndexOf(Object o) {
-        if(o == null) throw new NullPointerException("La lista non ammette elementi nulli");
+        if (o == null) throw new NullPointerException("La lista non ammette elementi nulli");
         Itr iterator = new Itr();
         int i = 0;
-        int lastOccurenceIndex = -1;
-        while(iterator.hasNext()) {
+        int lastOccurrenceIndex = -1;
+        while (iterator.hasNext()) {
             E item = iterator.next();
-            if(item.equals(o)) {
-                lastOccurenceIndex = i;
+            if (item.equals(o)) {
+                lastOccurrenceIndex = i;
             }
             i++;
         }
-        return lastOccurenceIndex;
+        return lastOccurrenceIndex;
     }
 
     @Override
@@ -399,7 +400,7 @@ public class ASDL2122SingleLinkedList<E> implements List<E> {
         Object[] array = new Object[size];
         Itr iterator = new Itr();
         int i = 0;
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             array[i++] = iterator.next();
         }
         return array;
