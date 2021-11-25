@@ -36,8 +36,8 @@ public class HeapSort<E extends Comparable<E>> implements SortingAlgorithm<E> {
     private void order(int index) {
         if (index == 0) return;
         int previousIndex = index - 1;
+        countCompare++;
         if (list.get(previousIndex).compareTo(list.get(index)) > 0) {
-            countCompare++;
             //Swap
             E temp = list.get(previousIndex);
             list.set(previousIndex, list.get(index));

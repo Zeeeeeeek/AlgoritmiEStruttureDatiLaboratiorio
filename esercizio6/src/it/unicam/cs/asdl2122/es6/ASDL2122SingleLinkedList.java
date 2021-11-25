@@ -58,7 +58,6 @@ public class ASDL2122SingleLinkedList<E> implements List<E> {
      */
     private static class Node<E> {
         private E item;
-
         private Node<E> next;
 
         /*
@@ -91,7 +90,7 @@ public class ASDL2122SingleLinkedList<E> implements List<E> {
         private Itr() {
             // All'inizio non è stato fatto nessun next
             this.lastReturned = null;
-            this.numeroModificheAtteso = ASDL2122SingleLinkedList.this.numeroModifiche;
+
         }
 
         @Override
