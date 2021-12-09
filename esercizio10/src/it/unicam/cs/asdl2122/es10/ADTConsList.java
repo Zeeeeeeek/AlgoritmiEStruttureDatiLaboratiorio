@@ -127,14 +127,19 @@ public interface ADTConsList<E> {
      *         {@code element} sono state cancellate.
      */
     default ADTConsList<E> removeAll(E element) {
-        // TODO implementare ricorsivamente
-        return null;
+        if(isEmpty()){
+            return this;
+        }
+        if(first().equals(element)){
+            return rest().removeAll(element);
+        }
+        return rest().removeAll(element).cons(first());
     }
 
     /**
      * Aggiorna il primo elemento uguale a un elemento dato con un nuovo
      * elemento in questa lista.
-     * 
+     *
      * @param element
      *                       l'elemento da aggiornare
      * @param newElement
@@ -145,14 +150,19 @@ public interface ADTConsList<E> {
      *         {@code newElement}
      */
     default ADTConsList<E> updateFirst(E element, E newElement) {
-        // TODO implementare ricorsivamente
-        return null;
+        if(isEmpty()){
+            return this;
+        }
+        if (first().equals(element)){
+            return rest().cons(newElement);
+        }
+        return rest().updateFirst(element, newElement).cons(first());
     }
 
     /**
      * Aggiorna tutti gli elementi uguali a un elemento dato con un nuovo
      * elemento in questa lista.
-     * 
+     *
      * @param element
      *                       l'elemento da aggiornare
      * @param newElement
@@ -163,21 +173,26 @@ public interface ADTConsList<E> {
      *         {@code newElement}
      */
     default ADTConsList<E> updateAll(E element, E newElement) {
-        // TODO implementare ricorsivamente
-        return null;
+        if(isEmpty()){
+            return this;
+        }
+        if (first().equals(element)){
+            return rest().updateAll(element, newElement).cons(newElement);
+        }
+        return rest().updateAll(element, newElement).cons(first());
     }
 
     /**
      * Attacca una lista data in fondo a questa lista.
-     * 
+     *
      * @param list
      *                 la lista da attaccare in fondo
      * @return una lista che contiene gli elementi di questa lista seguita dagli
      *         elementi di {@code list}.
      */
     default ADTConsList<E> append(ADTConsList<E> list) {
-        // TODO implementare ricorsivamente
-        return null;
+        if(isEmpty()) return list;
+        return rest().append(list).cons(first());
     }
 
     /**

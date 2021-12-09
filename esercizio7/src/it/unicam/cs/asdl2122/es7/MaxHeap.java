@@ -66,18 +66,26 @@ public class MaxHeap<E extends Comparable<E>> {
      */
     public void insert(E el) {
         if (el == null) throw new NullPointerException("L'elemento è null");
-        heap.add(el);
-        if (heap.size() == 1) return;
-        if (heap.size() == 2) {
-            if (el.compareTo(heap.get(0)) > 0) {
+        if(heap.size() == 0) {
+            heap.add(el);
+            return;
+        }
+
+        if(heap.size()== 1) {
+            heap.add(el);
+            if(el.compareTo(heap.get(0)) > 0) {
                 swap(0, 1);
             }
             return;
         }
+
+
+        heap.add(el);
         int elPos = size() - 1;
-        while (el.compareTo(heap.get(parentIndex(elPos))) > 0) {
+        while (elPos > 0 && el.compareTo(heap.get(parentIndex(elPos))) > 0) {
             swap(elPos, parentIndex(elPos));
             elPos = parentIndex(elPos);
+            if(elPos <=0) break;
         }
     }
 
@@ -105,7 +113,7 @@ public class MaxHeap<E extends Comparable<E>> {
      * la radice dello heap.
      */
     private int parentIndex(int i) {
-        return (i - 1) / 2;
+        return (i / 2) - 1;
     }
 
     /**

@@ -563,6 +563,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
             if(right != null) {
                 return right.getMinNode();
             }
+            if(parent == null) return null;
             if(parent.label.compareTo(label) < 0) return null;
             return parent;
         }
@@ -579,6 +580,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
             if(left != null) {
                 return left.getMaxNode();
             }
+            if(parent == null) return this;
             if(parent.label.compareTo(label) > 0) return null;
             return parent;
         }
@@ -590,7 +592,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
          * Cfr. slides di teoria.
          */
         protected void deleteSelfLabel() {
-            // TODO nn cpt
+            // TODO
         }
     }
 }
